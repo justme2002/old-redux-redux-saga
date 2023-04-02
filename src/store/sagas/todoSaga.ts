@@ -40,7 +40,7 @@ export function* watchGetTodoSaga(action: any)
   })
 }
 
-export function* watchFetchTodoSaga(action: any)
+export function* watchFetchTodoSaga(action: { payload: { limit: number } })
 {
   const response: ITodo[] = yield fetchLimitTodo(action.payload.limit)
   yield put({
@@ -52,6 +52,6 @@ export function* watchFetchTodoSaga(action: any)
 }
 
 export const todoSaga = [
-  takeLatest(LIMIT_TODO, watchFetchTodoSaga),
+  takeLatest(LIMIT_TODO as any, watchFetchTodoSaga),
   takeLatest(GET_TODO_ID, watchGetTodoSaga)
 ]
